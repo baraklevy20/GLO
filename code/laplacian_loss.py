@@ -72,4 +72,4 @@ class LaplacianLoss(nn.Module):
         target = build_laplacian_pyramid(target, self.kernel, self.max_levels)
 
         # Sum over the different levels
-        return sum(fnn.l1_loss(s, t) for s, t in zip(source, target))
+        return sum(fnn.l1_loss(s, t) / float(s.shape[2]) for s, t in zip(source, target))
